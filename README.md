@@ -11,3 +11,27 @@ Planned scripts:
 - `web_scraper/` -- polite scraper with requests + BeautifulSoup
 
 > Each utility will ship with: usage docs, example input/output, and tests.
+
+## Status
+
+| Script           | Status   | Notes                                  |
+| ---------------- | -------- | -------------------------------------- |
+| `bulk_renamer`   | planned  | first pickup — designed for dry-run    |
+| `pdf_merger`     | planned  | uses `pypdf`                           |
+| `csv_cleaner`    | planned  | encoding sniff + header normalization  |
+| `web_scraper`    | planned  | rate-limited; `robots.txt` respected   |
+
+**Next pickup:** `bulk_renamer` — a CLI that previews renames before
+applying them. The first commit will land the dry-run skeleton and a
+test fixture; the second will wire up the actual rename pass behind a
+`--apply` flag.
+
+---
+
+### Log
+
+- **2026-05-25** — Locked `bulk_renamer` as the first concrete pickup. The
+  dry-run-first design (preview every rename before any file moves) sets
+  the safety pattern the rest of the utilities should inherit: any
+  destructive utility in this repo should default to dry-run and require
+  an explicit `--apply` flag to actually mutate state.
