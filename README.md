@@ -35,3 +35,11 @@ test fixture; the second will wire up the actual rename pass behind a
   the safety pattern the rest of the utilities should inherit: any
   destructive utility in this repo should default to dry-run and require
   an explicit `--apply` flag to actually mutate state.
+
+- **2026-05-27** -- `bulk_renamer` design note: the dry-run output must be
+  diff-shaped (one line per rename, `old -> new`, sorted lexically) so
+  the user can pipe it through `grep`, `wc -l`, or save it for review
+  before running with `--apply`. Lifting the "tabulate state first,
+  mutate second" discipline straight out of the DP work happening in
+  the DSA repos -- compute the full plan in memory, validate it, then
+  commit. No interleaving reads and writes.
